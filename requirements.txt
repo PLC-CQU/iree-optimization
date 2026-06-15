@@ -1,0 +1,7 @@
+numpy
+onnx
+onnxruntime
+torch
+transformers
+sentencepiece
+matplotlib

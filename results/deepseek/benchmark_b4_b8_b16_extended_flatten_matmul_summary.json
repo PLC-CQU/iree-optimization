@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-24T13:26:24.852054",
+    "model": "DeepSeek-R1-Llama-8B",
+    "backend": "IREE CUDA",
+    "optimization": "Graph-level MatMul flatten",
+    "sources": [
+      "benchmark_b4_b8_seq32_64_128_flatten_matmul_summary.json",
+      "benchmark_b8_s256_last_flatten_matmul.json",
+      "benchmark_b16_s128_last_flatten_matmul.json"
+    ],
+    "note": "Extended comparison: old six baseline-vs-flatten shapes plus new larger flatten_matmul-only shapes."
+  },
+  "summary": {
+    "num_shapes": 8,
+    "num_flatten_completed": 8,
+    "num_baseline_completed": 6,
+    "best_speedup": 10.746426268909305,
+    "min_speedup": 3.000794430879165,
+    "mean_speedup": 6.155288138022724,
+    "best_flatten_token_slots_per_second": 7866.982269498721
+  },
+  "results": [
+    {
+      "shape": "b4_s32",
+      "batch": 4,
+      "seq": 32,
+      "token_slots": 128,
+      "status": "ok",
+      "source": "benchmark_b4_s32_flatten_matmul_compare.json",
+      "baseline": {
+        "status": "ok",
+        "latency_ms": 314.07169332378544,
+        "sequences_per_second": 12.736000837943479,
+        "token_slots_per_second": 407.5520268141913
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 39.533618558198214,
+        "batch_iterations_per_second": 25.294972632290296,
+        "sequences_per_second": 101.17989052916118,
+        "token_slots_per_second": 3237.756496933158
+      },
+      "speedup": 7.944420591336317,
+      "latency_reduction_percent": 87.41254961890441
+    },
+    {
+      "shape": "b4_s64",
+      "batch": 4,
+      "seq": 64,
+      "token_slots": 256,
+      "status": "ok",
+      "source": "benchmark_b4_s64_flatten_matmul_compare.json",
+      "baseline": {
+        "status": "ok",
+        "latency_ms": 308.11714407522237,
+        "sequences_per_second": 12.982469589635773,
+        "token_slots_per_second": 830.8780537366895
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 60.680777272209525,
+        "batch_iterations_per_second": 16.47971471520913,
+        "sequences_per_second": 65.91885886083652,
+        "token_slots_per_second": 4218.806967093537
+      },
+      "speedup": 5.077672995074394,
+      "latency_reduction_percent": 80.30593933539927
+    },
+    {
+      "shape": "b8_s32",
+      "batch": 8,
+      "seq": 32,
+      "token_slots": 256,
+      "status": "ok",
+      "source": "benchmark_b8_s32_flatten_matmul_compare.json",
+      "baseline": {
+        "status": "ok",
+        "latency_ms": 648.7163624190725,
+        "sequences_per_second": 12.332057526810672,
+        "token_slots_per_second": 394.6258408579415
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 60.365776136750355,
+        "batch_iterations_per_second": 16.56568327416478,
+        "sequences_per_second": 132.52546619331824,
+        "token_slots_per_second": 4240.814918186184
+      },
+      "speedup": 10.746426268909305,
+      "latency_reduction_percent": 90.69458092414294
+    },
+    {
+      "shape": "b4_s128",
+      "batch": 4,
+      "seq": 128,
+      "token_slots": 512,
+      "status": "ok",
+      "source": "benchmark_b4_s128_flatten_matmul_compare.json",
+      "baseline": {
+        "status": "ok",
+        "latency_ms": 342.76852578506805,
+        "sequences_per_second": 11.669717674640221,
+        "token_slots_per_second": 1493.7238623539483
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 114.22592706046999,
+        "batch_iterations_per_second": 8.754580903337974,
+        "sequences_per_second": 35.018323613351896,
+        "token_slots_per_second": 4482.345422509043
+      },
+      "speedup": 3.000794430879165,
+      "latency_reduction_percent": 66.67549133957095
+    },
+    {
+      "shape": "b8_s64",
+      "batch": 8,
+      "seq": 64,
+      "token_slots": 512,
+      "status": "ok",
+      "source": "benchmark_b8_s64_flatten_matmul_compare.json",
+      "baseline": {
+        "status": "ok",
+        "latency_ms": 608.4865731268657,
+        "sequences_per_second": 13.14741019114874,
+        "token_slots_per_second": 841.4342522335194
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 111.45501832128505,
+        "batch_iterations_per_second": 8.972229948140285,
+        "sequences_per_second": 71.77783958512228,
+        "token_slots_per_second": 4593.781733447826
+      },
+      "speedup": 5.4594811637176885,
+      "latency_reduction_percent": 81.6832411357009
+    },
+    {
+      "shape": "b8_s128",
+      "batch": 8,
+      "seq": 128,
+      "token_slots": 1024,
+      "status": "ok",
+      "source": "benchmark_b8_s128_flatten_matmul_compare.json",
+      "baseline": {
+        "status": "ok",
+        "latency_ms": 681.370467155939,
+        "sequences_per_second": 11.741085343285258,
+        "token_slots_per_second": 1502.858923940513
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 144.88201561849564,
+        "batch_iterations_per_second": 6.902175973343856,
+        "sequences_per_second": 55.21740778675085,
+        "token_slots_per_second": 7067.828196704108
+      },
+      "speedup": 4.702933378219479,
+      "latency_reduction_percent": 78.73667518593261
+    },
+    {
+      "shape": "b8_s256",
+      "batch": 8,
+      "seq": 256,
+      "token_slots": 2048,
+      "status": "ok",
+      "source": "benchmark_b8_s256_last_flatten_matmul.json",
+      "baseline": {
+        "status": "oom",
+        "latency_ms": null,
+        "sequences_per_second": null,
+        "token_slots_per_second": null
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 263.5472392042478,
+        "latency_ms_median": 263.5265568038448,
+        "batch_iterations_per_second": 3.7943889581937023,
+        "sequences_per_second": 30.355111665549618,
+        "token_slots_per_second": 7770.908586380702
+      },
+      "speedup": null,
+      "latency_reduction_percent": null
+    },
+    {
+      "shape": "b16_s128",
+      "batch": 16,
+      "seq": 128,
+      "token_slots": 2048,
+      "status": "ok",
+      "source": "benchmark_b16_s128_last_flatten_matmul.json",
+      "baseline": {
+        "status": "missing",
+        "latency_ms": null,
+        "sequences_per_second": null,
+        "token_slots_per_second": null
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "latency_ms": 260.32867466759245,
+        "latency_ms_median": 260.4111324006226,
+        "batch_iterations_per_second": 3.841299936278672,
+        "sequences_per_second": 61.460798980458755,
+        "token_slots_per_second": 7866.982269498721
+      },
+      "speedup": null,
+      "latency_reduction_percent": null
+    }
+  ]
+}

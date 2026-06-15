@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Build and generated compiler artifacts
+build/
+build_*/
+*-build/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+*.mlirbc
+*.vmfb
+*.irpa
+*.onnx
+*.safetensors
+*.pt
+*.pth
+*.npy
+*.npz
+
+# Large local model/artifact directories
+model/
+models/
+logs/
+tmp/
+out/
+outputs/
+dynamic_shape_b_s/
+flatten_shape_*/
+correctness_*/
+
+# Runtime and editor files
+*.log
+*.tmp
+.DS_Store
+.vscode/
+.idea/

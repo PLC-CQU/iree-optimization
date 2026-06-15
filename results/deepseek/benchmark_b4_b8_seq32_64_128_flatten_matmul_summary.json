@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-05T21:38:39.591195",
+    "batches": [
+      4,
+      8
+    ],
+    "seqs": [
+      32,
+      64,
+      128
+    ],
+    "model": "DeepSeek-R1-Llama-8B",
+    "backend": "IREE CUDA",
+    "optimization": "Graph-level MatMul flatten"
+  },
+  "summary": {
+    "num_shapes": 6,
+    "num_completed": 6,
+    "best_speedup": 10.746426268909305,
+    "min_speedup": 3.000794430879165,
+    "mean_speedup": 6.155288138022725
+  },
+  "results": [
+    {
+      "batch": 4,
+      "seq": 32,
+      "status": "ok",
+      "source": "benchmark_b4_s32_flatten_matmul_compare.json",
+      "baseline_latency_ms": 314.07169332378544,
+      "flatten_matmul_latency_ms": 39.533618558198214,
+      "baseline_tokens_per_second": 407.5520268141913,
+      "flatten_matmul_tokens_per_second": 3237.756496933158,
+      "baseline_sequences_per_second": 12.736000837943479,
+      "flatten_matmul_sequences_per_second": 101.17989052916118,
+      "speedup": 7.944420591336317,
+      "latency_reduction_percent": 87.41254961890441
+    },
+    {
+      "batch": 4,
+      "seq": 64,
+      "status": "ok",
+      "source": "benchmark_b4_s64_flatten_matmul_compare.json",
+      "baseline_latency_ms": 308.11714407522237,
+      "flatten_matmul_latency_ms": 60.680777272209525,
+      "baseline_tokens_per_second": 830.8780537366895,
+      "flatten_matmul_tokens_per_second": 4218.806967093537,
+      "baseline_sequences_per_second": 12.982469589635773,
+      "flatten_matmul_sequences_per_second": 65.91885886083652,
+      "speedup": 5.077672995074394,
+      "latency_reduction_percent": 80.30593933539927
+    },
+    {
+      "batch": 4,
+      "seq": 128,
+      "status": "ok",
+      "source": "benchmark_b4_s128_flatten_matmul_compare.json",
+      "baseline_latency_ms": 342.76852578506805,
+      "flatten_matmul_latency_ms": 114.22592706046999,
+      "baseline_tokens_per_second": 1493.7238623539483,
+      "flatten_matmul_tokens_per_second": 4482.345422509043,
+      "baseline_sequences_per_second": 11.669717674640221,
+      "flatten_matmul_sequences_per_second": 35.018323613351896,
+      "speedup": 3.000794430879165,
+      "latency_reduction_percent": 66.67549133957095
+    },
+    {
+      "batch": 8,
+      "seq": 32,
+      "status": "ok",
+      "source": "benchmark_b8_s32_flatten_matmul_compare.json",
+      "baseline_latency_ms": 648.7163624190725,
+      "flatten_matmul_latency_ms": 60.365776136750355,
+      "baseline_tokens_per_second": 394.6258408579415,
+      "flatten_matmul_tokens_per_second": 4240.814918186184,
+      "baseline_sequences_per_second": 12.332057526810672,
+      "flatten_matmul_sequences_per_second": 132.52546619331824,
+      "speedup": 10.746426268909305,
+      "latency_reduction_percent": 90.69458092414294
+    },
+    {
+      "batch": 8,
+      "seq": 64,
+      "status": "ok",
+      "source": "benchmark_b8_s64_flatten_matmul_compare.json",
+      "baseline_latency_ms": 608.4865731268657,
+      "flatten_matmul_latency_ms": 111.45501832128505,
+      "baseline_tokens_per_second": 841.4342522335194,
+      "flatten_matmul_tokens_per_second": 4593.781733447826,
+      "baseline_sequences_per_second": 13.14741019114874,
+      "flatten_matmul_sequences_per_second": 71.77783958512228,
+      "speedup": 5.4594811637176885,
+      "latency_reduction_percent": 81.6832411357009
+    },
+    {
+      "batch": 8,
+      "seq": 128,
+      "status": "ok",
+      "source": "benchmark_b8_s128_flatten_matmul_compare.json",
+      "baseline_latency_ms": 681.370467155939,
+      "flatten_matmul_latency_ms": 144.88201561849564,
+      "baseline_tokens_per_second": 1502.858923940513,
+      "flatten_matmul_tokens_per_second": 7067.828196704108,
+      "baseline_sequences_per_second": 11.741085343285258,
+      "flatten_matmul_sequences_per_second": 55.21740778675085,
+      "speedup": 4.702933378219479,
+      "latency_reduction_percent": 78.73667518593261
+    }
+  ]
+}

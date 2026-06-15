@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-07T22:54:24.591296",
+    "batch": 4,
+    "seq": 32,
+    "input_ids_value": 0,
+    "attention_mask_value": 1,
+    "gpu": "0"
+  },
+  "runs": {
+    "baseline": {
+      "label": "baseline",
+      "command": [
+        "iree-run-module",
+        "--module=deepseek_r1_8b_onnx_iree_cuda_b4_s32_last_baseline.vmfb",
+        "--parameters=model=flatten_shape_b4_s32/build_baseline/deepseek_r1_8b_params.irpa",
+        "--parameter_mode=file",
+        "--device=cuda",
+        "--function=main_graph",
+        "--input=4x32xi64=0",
+        "--input=4x32xi64=1",
+        "--output=@correctness_b4_s32_flatten_matmul/baseline_logits.npy"
+      ],
+      "started": "2026-05-07T22:42:05.727193",
+      "finished": "2026-05-07T22:50:50.508026",
+      "returncode": 0,
+      "stdout": "EXEC @main_graph\n",
+      "stderr": "",
+      "output": "correctness_b4_s32_flatten_matmul/baseline_logits.npy"
+    },
+    "flatten_matmul": {
+      "label": "flatten_matmul",
+      "command": [
+        "iree-run-module",
+        "--module=deepseek_r1_8b_onnx_iree_cuda_b4_s32_last_flatten_matmul.vmfb",
+        "--parameters=model=flatten_shape_b4_s32/build_flatten_matmul/deepseek_r1_8b_params.irpa",
+        "--parameter_mode=file",
+        "--device=cuda",
+        "--function=main_graph",
+        "--input=4x32xi64=0",
+        "--input=4x32xi64=1",
+        "--output=@correctness_b4_s32_flatten_matmul/flatten_matmul_logits.npy"
+      ],
+      "started": "2026-05-07T22:50:50.508209",
+      "finished": "2026-05-07T22:54:24.591255",
+      "returncode": 0,
+      "stdout": "EXEC @main_graph\n",
+      "stderr": "",
+      "output": "correctness_b4_s32_flatten_matmul/flatten_matmul_logits.npy"
+    }
+  },
+  "comparison": {
+    "shape": [
+      4,
+      128256
+    ],
+    "dtype_reference": "float32",
+    "dtype_candidate": "float32",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "rmse": 0.0,
+    "max_relative_error": 0.0,
+    "mean_relative_error": 0.0,
+    "allclose_atol_1e_3_rtol_1e_3": true,
+    "allclose_atol_1e_2_rtol_1e_2": true,
+    "max_error_index": [
+      0,
+      0
+    ],
+    "reference_at_max_error": -1.6552734375,
+    "candidate_at_max_error": -1.6552734375
+  }
+}

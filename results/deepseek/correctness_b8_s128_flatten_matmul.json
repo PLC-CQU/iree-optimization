@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-23T20:49:20.574858",
+    "batch": 8,
+    "seq": 128,
+    "input_ids_value": 0,
+    "attention_mask_value": 1,
+    "gpu": "1"
+  },
+  "runs": {
+    "baseline": {
+      "label": "baseline",
+      "command": [
+        "iree-run-module",
+        "--module=deepseek_r1_8b_onnx_iree_cuda_b8_s128_last_baseline.vmfb",
+        "--parameters=model=flatten_shape_b8_s128/build_baseline/deepseek_r1_8b_params.irpa",
+        "--parameter_mode=file",
+        "--device=cuda",
+        "--function=main_graph",
+        "--input=8x128xi64=0",
+        "--input=8x128xi64=1",
+        "--output=@correctness_b8_s128_flatten_matmul/baseline_logits.npy"
+      ],
+      "started": "2026-05-23T20:47:43.026809",
+      "finished": "2026-05-23T20:49:11.255445",
+      "returncode": 0,
+      "stdout": "EXEC @main_graph\n",
+      "stderr": "",
+      "output": "correctness_b8_s128_flatten_matmul/baseline_logits.npy"
+    },
+    "flatten_matmul": {
+      "label": "flatten_matmul",
+      "command": [
+        "iree-run-module",
+        "--module=deepseek_r1_8b_onnx_iree_cuda_b8_s128_last_flatten_matmul.vmfb",
+        "--parameters=model=flatten_shape_b8_s128/build_flatten_matmul/deepseek_r1_8b_params.irpa",
+        "--parameter_mode=file",
+        "--device=cuda",
+        "--function=main_graph",
+        "--input=8x128xi64=0",
+        "--input=8x128xi64=1",
+        "--output=@correctness_b8_s128_flatten_matmul/flatten_matmul_logits.npy"
+      ],
+      "started": "2026-05-23T20:49:11.255612",
+      "finished": "2026-05-23T20:49:20.574805",
+      "returncode": 0,
+      "stdout": "EXEC @main_graph\n",
+      "stderr": "",
+      "output": "correctness_b8_s128_flatten_matmul/flatten_matmul_logits.npy"
+    }
+  },
+  "comparison": {
+    "shape": [
+      8,
+      128256
+    ],
+    "dtype_reference": "float32",
+    "dtype_candidate": "float32",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "rmse": 0.0,
+    "max_relative_error": 0.0,
+    "mean_relative_error": 0.0,
+    "allclose_atol_1e_3_rtol_1e_3": true,
+    "allclose_atol_1e_2_rtol_1e_2": true,
+    "max_error_index": [
+      0,
+      0
+    ],
+    "reference_at_max_error": -1.6552734375,
+    "candidate_at_max_error": -1.6552734375
+  }
+}
