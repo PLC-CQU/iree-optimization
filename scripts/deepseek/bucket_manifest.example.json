@@ -1,0 +1,43 @@
+{
+  "base_dir": ".",
+  "function": "main_graph",
+  "output_token": "index",
+  "buckets": [
+    {
+      "batch": 4,
+      "seq": 32,
+      "module": "deepseek_r1_8b_onnx_iree_cuda_b4_s32_last_nonpad_index_flatten_matmul_input_i32_with_demote.vmfb",
+      "params": "flatten_shape_b4_s32/build_flatten_matmul_last_nonpad_index_input_i32_with_demote/deepseek_r1_8b_params.irpa"
+    },
+    {
+      "batch": 4,
+      "seq": 64,
+      "module": "deepseek_r1_8b_onnx_iree_cuda_b4_s64_last_nonpad_index_flatten_matmul_input_i32_with_demote.vmfb",
+      "params": "flatten_shape_b4_s64/build_flatten_matmul_last_nonpad_index_input_i32_with_demote/deepseek_r1_8b_params.irpa"
+    },
+    {
+      "batch": 4,
+      "seq": 128,
+      "module": "deepseek_r1_8b_onnx_iree_cuda_b4_s128_last_nonpad_index_flatten_matmul_input_i32_with_demote.vmfb",
+      "params": "flatten_shape_b4_s128/build_flatten_matmul_last_nonpad_index_input_i32_with_demote/deepseek_r1_8b_params.irpa"
+    },
+    {
+      "batch": 8,
+      "seq": 32,
+      "module": "deepseek_r1_8b_onnx_iree_cuda_b8_s32_last_nonpad_index_flatten_matmul_input_i32_with_demote.vmfb",
+      "params": "flatten_shape_b8_s32/build_flatten_matmul_last_nonpad_index_input_i32_with_demote/deepseek_r1_8b_params.irpa"
+    },
+    {
+      "batch": 8,
+      "seq": 64,
+      "module": "deepseek_r1_8b_onnx_iree_cuda_b8_s64_last_nonpad_index_flatten_matmul_input_i32_with_demote.vmfb",
+      "params": "flatten_shape_b8_s64/build_flatten_matmul_last_nonpad_index_input_i32_with_demote/deepseek_r1_8b_params.irpa"
+    },
+    {
+      "batch": 8,
+      "seq": 128,
+      "module": "deepseek_r1_8b_onnx_iree_cuda_b8_s128_last_nonpad_index_flatten_matmul_input_i32_with_demote.vmfb",
+      "params": "flatten_shape_b8_s128/build_flatten_matmul_last_nonpad_index_input_i32_with_demote/deepseek_r1_8b_params.irpa"
+    }
+  ]
+}

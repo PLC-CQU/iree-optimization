@@ -1,0 +1,420 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-04T21:22:23.990282",
+    "base_dir": "/home/zhongjialin/projects/iree/deepseek-R1-Llama-8b"
+  },
+  "evidence": {
+    "direct_iree_dynamic_vs_bucket": {
+      "status": "present",
+      "path": "correctness_dynamic_vs_bucket_b4_s64_flatten_matmul.json",
+      "request_shape": "b4_s64",
+      "bucket_shape": "b4_s64",
+      "bucket_output_token": "physical_last",
+      "last_token_caveat": null,
+      "comparison": {
+        "shape": [
+          4,
+          128256
+        ],
+        "max_abs_error": 0.0078125,
+        "mean_abs_error": 0.0006006599287502468,
+        "rmse": 0.0008471692563034594,
+        "max_relative_error": 196.30435180664062,
+        "allclose_atol_1e_3_rtol_1e_3": false,
+        "allclose_atol_1e_2_rtol_1e_2": true,
+        "bucket_full_shape": [
+          4,
+          128256
+        ],
+        "compared_bucket_rows": 4
+      }
+    },
+    "static_flatten_vs_static_baseline": [
+      {
+        "status": "present",
+        "path": "correctness_b4_s32_flatten_matmul.json",
+        "shape": "b4_s32",
+        "comparison": {
+          "shape": [
+            4,
+            128256
+          ],
+          "max_abs_error": 0.0,
+          "mean_abs_error": 0.0,
+          "rmse": 0.0,
+          "allclose_atol_1e_3_rtol_1e_3": true,
+          "allclose_atol_1e_2_rtol_1e_2": true
+        }
+      },
+      {
+        "status": "present",
+        "path": "correctness_b8_s64_flatten_matmul.json",
+        "shape": "b8_s64",
+        "comparison": {
+          "shape": [
+            8,
+            128256
+          ],
+          "max_abs_error": 0.0,
+          "mean_abs_error": 0.0,
+          "rmse": 0.0,
+          "allclose_atol_1e_3_rtol_1e_3": true,
+          "allclose_atol_1e_2_rtol_1e_2": true
+        }
+      },
+      {
+        "status": "present",
+        "path": "correctness_b8_s128_flatten_matmul.json",
+        "shape": "b8_s128",
+        "comparison": {
+          "shape": [
+            8,
+            128256
+          ],
+          "max_abs_error": 0.0,
+          "mean_abs_error": 0.0,
+          "rmse": 0.0,
+          "allclose_atol_1e_3_rtol_1e_3": true,
+          "allclose_atol_1e_2_rtol_1e_2": true
+        }
+      }
+    ],
+    "padding_semantics": [
+      {
+        "status": "present",
+        "path": "results/padding_semantics_fixed_constant_atol3e-2.json",
+        "reference": "fixed",
+        "input_mode": "constant",
+        "atol": 0.03,
+        "rtol": 0.01,
+        "passed": 11,
+        "total": 11,
+        "all_passed": true,
+        "max_abs_error": 0.0234375,
+        "max_mean_abs_error": 0.003506758250296116,
+        "failed": []
+      },
+      {
+        "status": "present",
+        "path": "results/padding_semantics_fixed_random_atol5e-2.json",
+        "reference": "fixed",
+        "input_mode": "random",
+        "atol": 0.05,
+        "rtol": 0.01,
+        "passed": 11,
+        "total": 11,
+        "all_passed": true,
+        "max_abs_error": 0.04296875,
+        "max_mean_abs_error": 0.005873566027730703,
+        "failed": []
+      }
+    ],
+    "same_input_benchmark": {
+      "status": "present",
+      "path": "results/dynamic_bucket_same_input_benchmark/summary.json",
+      "request_count": 11,
+      "requests": [
+        {
+          "request_shape": "b1_s16",
+          "bucket_shape": "b4_s32",
+          "bucket_padding_ratio": 0.875
+        },
+        {
+          "request_shape": "b1_s32",
+          "bucket_shape": "b4_s32",
+          "bucket_padding_ratio": 0.75
+        },
+        {
+          "request_shape": "b1_s48",
+          "bucket_shape": "b4_s64",
+          "bucket_padding_ratio": 0.8125
+        },
+        {
+          "request_shape": "b1_s64",
+          "bucket_shape": "b4_s64",
+          "bucket_padding_ratio": 0.75
+        },
+        {
+          "request_shape": "b1_s96",
+          "bucket_shape": "b4_s128",
+          "bucket_padding_ratio": 0.8125
+        },
+        {
+          "request_shape": "b1_s128",
+          "bucket_shape": "b4_s128",
+          "bucket_padding_ratio": 0.75
+        },
+        {
+          "request_shape": "b2_s48",
+          "bucket_shape": "b4_s64",
+          "bucket_padding_ratio": 0.625
+        },
+        {
+          "request_shape": "b3_s80",
+          "bucket_shape": "b4_s128",
+          "bucket_padding_ratio": 0.53125
+        },
+        {
+          "request_shape": "b4_s64",
+          "bucket_shape": "b4_s64",
+          "bucket_padding_ratio": 0.0
+        },
+        {
+          "request_shape": "b5_s96",
+          "bucket_shape": "b8_s128",
+          "bucket_padding_ratio": 0.53125
+        },
+        {
+          "request_shape": "b8_s128",
+          "bucket_shape": "b8_s128",
+          "bucket_padding_ratio": 0.0
+        }
+      ],
+      "note": "Latency benchmark with matched inputs; it does not compare output tensors."
+    },
+    "b4_s64_random_iree_matrix": {
+      "status": "present",
+      "path": "results/dynamic_bucket_correctness_matrix_b4_s64_only/summary.json",
+      "metadata": {
+        "input_mode": "random",
+        "atol": 0.01,
+        "rtol": 0.01,
+        "bucket_output_token": "index"
+      },
+      "aggregate": {
+        "total": 4,
+        "passed": 0,
+        "failed": 4,
+        "incomparable": 0,
+        "missing_artifact": 0,
+        "run_failed": 0,
+        "shape_mismatch": 0,
+        "dry_run": 0,
+        "all_passed": false
+      },
+      "rows": [
+        {
+          "request_shape": "b1_s48",
+          "bucket_shape": "b4_s64",
+          "status": "failed",
+          "max_abs_error": 7.4345703125,
+          "mean_abs_error": 1.044812798500061,
+          "rmse": 1.3055436611175537,
+          "allclose": false
+        },
+        {
+          "request_shape": "b1_s64",
+          "bucket_shape": "b4_s64",
+          "status": "failed",
+          "max_abs_error": 10.09814453125,
+          "mean_abs_error": 1.1234328746795654,
+          "rmse": 1.4177584648132324,
+          "allclose": false
+        },
+        {
+          "request_shape": "b2_s48",
+          "bucket_shape": "b4_s64",
+          "status": "failed",
+          "max_abs_error": 16.158203125,
+          "mean_abs_error": 1.3515013456344604,
+          "rmse": 1.7517343759536743,
+          "allclose": false
+        },
+        {
+          "request_shape": "b4_s64",
+          "bucket_shape": "b4_s64",
+          "status": "failed",
+          "max_abs_error": 14.5771484375,
+          "mean_abs_error": 1.2146122455596924,
+          "rmse": 1.6330780982971191,
+          "allclose": false
+        }
+      ]
+    },
+    "pytorch_diagnosis": {
+      "status": "present",
+      "path": "results/dynamic_bucket_correctness_matrix_b4_s64_only/pytorch_diagnosis.json",
+      "metadata": {
+        "atol": 0.01,
+        "rtol": 0.01,
+        "device": "cuda"
+      },
+      "rows": [
+        {
+          "request_shape": "b1_s48",
+          "bucket_shape": "b4_s64",
+          "dynamic_iree_vs_torch_dynamic_max_abs": 12.93359375,
+          "bucket_iree_vs_torch_fixed_max_abs": 17.19921875,
+          "torch_dynamic_vs_fixed_max_abs": 0.0438995361328125,
+          "dynamic_iree_vs_bucket_iree_max_abs": 7.4345703125,
+          "dynamic_iree_vs_torch_dynamic_allclose": false,
+          "bucket_iree_vs_torch_fixed_allclose": false,
+          "torch_dynamic_vs_fixed_allclose": false
+        },
+        {
+          "request_shape": "b1_s64",
+          "bucket_shape": "b4_s64",
+          "dynamic_iree_vs_torch_dynamic_max_abs": 11.62890625,
+          "bucket_iree_vs_torch_fixed_max_abs": 11.36328125,
+          "torch_dynamic_vs_fixed_max_abs": 0.0546875,
+          "dynamic_iree_vs_bucket_iree_max_abs": 10.09814453125,
+          "dynamic_iree_vs_torch_dynamic_allclose": false,
+          "bucket_iree_vs_torch_fixed_allclose": false,
+          "torch_dynamic_vs_fixed_allclose": false
+        },
+        {
+          "request_shape": "b2_s48",
+          "bucket_shape": "b4_s64",
+          "dynamic_iree_vs_torch_dynamic_max_abs": 13.1640625,
+          "bucket_iree_vs_torch_fixed_max_abs": 17.71484375,
+          "torch_dynamic_vs_fixed_max_abs": 0.04052734375,
+          "dynamic_iree_vs_bucket_iree_max_abs": 16.158203125,
+          "dynamic_iree_vs_torch_dynamic_allclose": false,
+          "bucket_iree_vs_torch_fixed_allclose": false,
+          "torch_dynamic_vs_fixed_allclose": false
+        },
+        {
+          "request_shape": "b4_s64",
+          "bucket_shape": "b4_s64",
+          "dynamic_iree_vs_torch_dynamic_max_abs": 13.1015625,
+          "bucket_iree_vs_torch_fixed_max_abs": 15.69921875,
+          "torch_dynamic_vs_fixed_max_abs": 0.0,
+          "dynamic_iree_vs_bucket_iree_max_abs": 14.5771484375,
+          "dynamic_iree_vs_torch_dynamic_allclose": false,
+          "bucket_iree_vs_torch_fixed_allclose": false,
+          "torch_dynamic_vs_fixed_allclose": true
+        }
+      ],
+      "readout": [
+        "Dynamic IREE does not match PyTorch dynamic reference for at least one diagnosed row.",
+        "Bucket IREE does not match PyTorch fixed last_nonpad reference for at least one diagnosed row.",
+        "PyTorch dynamic and PyTorch fixed last_nonpad differ under the selected tolerance.",
+        "Tolerance used for all allclose checks: atol=0.01, rtol=0.01."
+      ]
+    },
+    "static_b4_s64_pytorch_diagnosis": {
+      "status": "present",
+      "path": "results/dynamic_bucket_correctness_matrix_b4_s64_only/static_b4_s64_pytorch_diagnosis.json",
+      "metadata": {
+        "atol": 0.06,
+        "rtol": 0.01,
+        "device": "cuda",
+        "gpu": "0"
+      },
+      "rows": [
+        {
+          "variant": "baseline_last",
+          "returncode": 0,
+          "allclose": false,
+          "max_abs_error": 12.796875,
+          "mean_abs_error": 1.607910394668579,
+          "stderr_excerpt": null
+        },
+        {
+          "variant": "flatten_last",
+          "returncode": 0,
+          "allclose": false,
+          "max_abs_error": 12.796875,
+          "mean_abs_error": 1.607910394668579,
+          "stderr_excerpt": null
+        },
+        {
+          "variant": "flatten_last_nonpad_index",
+          "returncode": 0,
+          "allclose": false,
+          "max_abs_error": 15.69921875,
+          "mean_abs_error": 1.6366485357284546,
+          "stderr_excerpt": null
+        }
+      ],
+      "readout": [
+        "baseline_last does not match PyTorch under the selected tolerance.",
+        "flatten_last does not match PyTorch under the selected tolerance.",
+        "flatten_last_nonpad_index does not match PyTorch under the selected tolerance."
+      ]
+    },
+    "onnx_b4_s64_pytorch_diagnosis": {
+      "status": "present",
+      "path": "results/dynamic_bucket_correctness_matrix_b4_s64_only/onnx_b4_s64_pytorch_diagnosis.json",
+      "metadata": {
+        "atol": 0.06,
+        "rtol": 0.01,
+        "provider": "CUDAExecutionProvider"
+      },
+      "provider_smoke_test": {
+        "ok": true,
+        "provider": "CUDAExecutionProvider",
+        "providers_used": [
+          "CUDAExecutionProvider",
+          "CPUExecutionProvider"
+        ]
+      },
+      "rows": [
+        {
+          "variant": "baseline_last",
+          "onnx_vs_pytorch_max_abs": 0.049072265625,
+          "onnx_vs_iree_max_abs": 12.80078125,
+          "onnx_vs_pytorch_allclose": true,
+          "error": null
+        },
+        {
+          "variant": "flatten_last",
+          "onnx_vs_pytorch_max_abs": 0.049072265625,
+          "onnx_vs_iree_max_abs": 12.80078125,
+          "onnx_vs_pytorch_allclose": true,
+          "error": null
+        },
+        {
+          "variant": "flatten_last_nonpad_index",
+          "onnx_vs_pytorch_max_abs": 0.0498046875,
+          "onnx_vs_iree_max_abs": 15.70703125,
+          "onnx_vs_pytorch_allclose": true,
+          "error": null
+        }
+      ],
+      "readout": [
+        "baseline_last ONNX matches PyTorch under the selected tolerance.",
+        "flatten_last ONNX matches PyTorch under the selected tolerance.",
+        "flatten_last_nonpad_index ONNX matches PyTorch under the selected tolerance."
+      ]
+    }
+  },
+  "conclusion": {
+    "answer": "not_sufficiently_proven",
+    "can_claim": [
+      "Bucketized static deployment is semantically viable in principle when padded buckets return last_nonpad logits or use explicit last_token_indices.",
+      "At the PyTorch wrapper level, right-padding plus last_nonpad token selection is close to exact-shape execution for the tested routed requests; random padded cases need a looser FP16 tolerance than 1e-2.",
+      "For b4_s64 random input, baseline_last, flatten_last, and flatten_last_nonpad_index ONNX Runtime outputs all match PyTorch under atol=6e-2, rtol=1e-2.",
+      "Earlier constant-input and static flatten-vs-baseline checks are useful smoke tests, but they are not enough for deployment correctness."
+    ],
+    "cannot_claim_yet": [
+      "The current deployed IREE dynamic and static bucket artifacts are not proven correct.",
+      "The b4_s64 random direct IREE matrix failed all four tested routes, including exact b4_s64 -> b4_s64.",
+      "The PyTorch diagnosis shows both dynamic IREE and bucket IREE differ from PyTorch references by large margins, while PyTorch dynamic-vs-fixed differences are small by comparison.",
+      "The static b4_s64 baseline/flatten/last_nonpad_index PyTorch diagnosis now runs, and even baseline_last differs from PyTorch; flatten_last exactly matches baseline_last, so flatten_matmul is not the first source of the large mismatch.",
+      "Because ONNX Runtime matches PyTorch but IREE differs from ONNX by large margins, the remaining correctness gap is in IREE import/compile/runtime or IREE parameter loading semantics.",
+      "The same-input benchmark is a latency benchmark and does not compare output tensors."
+    ],
+    "adverse_evidence": {
+      "b4_s64_random_matrix_all_passed": false,
+      "max_dynamic_iree_vs_torch_dynamic_abs_error": 13.1640625,
+      "max_bucket_iree_vs_torch_fixed_abs_error": 17.71484375,
+      "max_torch_dynamic_vs_fixed_abs_error": 0.0546875,
+      "static_b4_s64_diagnosis_all_variants_ran": true,
+      "onnxruntime_cuda_provider_ok": true,
+      "onnx_b4_s64_all_match_pytorch": true,
+      "max_onnx_vs_iree_abs_error": 15.70703125
+    },
+    "booleans": {
+      "direct_exact_bucket_passes_fp16_tolerance": true,
+      "direct_exact_bucket_passes_strict_tolerance": false,
+      "padding_semantics_all_passed": true,
+      "static_flatten_all_passed_strict": true,
+      "b4_s64_random_matrix_all_passed": false,
+      "static_b4_s64_diagnosis_all_variants_ran": true,
+      "onnxruntime_cuda_provider_ok": true,
+      "onnx_b4_s64_all_match_pytorch": true
+    },
+    "recommended_next_proof_step": "Debug the IREE baseline import/compile/runtime path first, because b4_s64 baseline ONNX matches PyTorch while b4_s64 baseline IREE does not. Recompile a minimal baseline without extra lowering flags where possible, inspect imported MLIR/input and parameter dtypes, and compare IREE against ONNX on progressively smaller slices or subgraphs before returning to the bucket matrix."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "timestamp": "2026-06-02T02:54:34.544901",
+    "model": "googlegemma-4-E4B-it",
+    "dtype": "float16",
+    "shapes": [
+      "b4_s32"
+    ],
+    "variants": [
+      "baseline",
+      "flatten_matmul"
+    ]
+  },
+  "results": [
+    {
+      "shape": "b4_s32",
+      "batch": 4,
+      "seq": 32,
+      "token_slots": 128,
+      "experiment": "gemma_e4b_it_b4_s32_fp16_cuda_standard",
+      "baseline_vmfb_exists": true,
+      "flatten_vmfb_exists": true,
+      "baseline": {
+        "status": "failed",
+        "log": "/home/zhongjialin/projects/iree/Gemma/experiments/gemma_e4b_it_b4_s32_fp16_cuda_standard/logs/benchmark_baseline.log",
+        "returncode": 250,
+        "reason": "c/runtime/src/iree/hal/drivers/cuda/event_semaphore.c:354: ABORTED; while calling variadic import; while invoking native function hal.fence.await;"
+      },
+      "flatten_matmul": {
+        "summary": "/home/zhongjialin/projects/iree/Gemma/experiments/gemma_e4b_it_b4_s32_fp16_cuda_standard/benchmark_flatten_matmul.googlebench.json",
+        "real_time_ms_mean": 48.56189257698134,
+        "real_time_ms_median": 48.17437048768625,
+        "batch_iterations_per_second": 20.597267407559936,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      }
+    }
+  ]
+}

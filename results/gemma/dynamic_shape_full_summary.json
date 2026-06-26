@@ -1,0 +1,70 @@
+{
+  "model": "Gemma E2B dynamic B/S",
+  "rows": [
+    {
+      "shape": "b1_s32",
+      "baseline_dynamic_ms": 136.60310907289386,
+      "optimized_dynamic_ms": 25.101569946855307,
+      "speedup": 5.44201455773914,
+      "correctness": {
+        "max_abs": 0.046875,
+        "mean_abs": 0.005619588773697615,
+        "allclose": true,
+        "shape": [
+          1,
+          262144
+        ]
+      }
+    },
+    {
+      "shape": "b1_s64",
+      "baseline_dynamic_ms": 198.06265955169997,
+      "optimized_dynamic_ms": 35.86956517150004,
+      "speedup": 5.5217468794149065,
+      "correctness": {
+        "max_abs": 0.0546875,
+        "mean_abs": 0.009317765943706036,
+        "allclose": true,
+        "shape": [
+          1,
+          262144
+        ]
+      }
+    },
+    {
+      "shape": "b4_s32",
+      "baseline_dynamic_ms": 396.72302997981507,
+      "optimized_dynamic_ms": 40.12542900939782,
+      "speedup": 9.887072606423676,
+      "correctness": {
+        "max_abs": 0.046875,
+        "mean_abs": 0.00561958784237504,
+        "allclose": true,
+        "shape": [
+          4,
+          262144
+        ]
+      }
+    }
+  ],
+  "ir_stats": [
+    {
+      "label": "baseline_global",
+      "path": "/tmp/gemma_e2b_dynamic_baseline_global.mlir",
+      "linalg_matmul": 0,
+      "linalg_batch_matmul": 279,
+      "linalg_generic": 4231,
+      "collapse_shape": 59,
+      "expand_shape": 54
+    },
+    {
+      "label": "optimized_global",
+      "path": "/tmp/gemma_e2b_dynamic_optimized_global.mlir",
+      "linalg_matmul": 277,
+      "linalg_batch_matmul": 2,
+      "linalg_generic": 3954,
+      "collapse_shape": 271,
+      "expand_shape": 331
+    }
+  ]
+}

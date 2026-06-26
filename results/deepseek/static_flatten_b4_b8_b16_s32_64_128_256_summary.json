@@ -1,0 +1,241 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-27T19:11:10.851248",
+    "shapes": [
+      "b4_s32",
+      "b4_s64",
+      "b4_s128",
+      "b4_s256",
+      "b8_s32",
+      "b8_s64",
+      "b8_s128",
+      "b8_s256",
+      "b16_s32",
+      "b16_s64",
+      "b16_s128",
+      "b16_s256"
+    ],
+    "benchmark_dir": ".",
+    "scope": "large static shapes, flatten_matmul only"
+  },
+  "rows": [
+    {
+      "shape": "b4_s32",
+      "batch": 4,
+      "seq": 32,
+      "token_slots": 128,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b4_s32_last_flatten_matmul.json",
+        "real_time_ms": 36.93650640780106,
+        "batch_iterations_per_second": 27.073520499790494,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 108.29408199916197,
+      "flatten_token_slots_per_second": 3465.410623973183
+    },
+    {
+      "shape": "b4_s64",
+      "batch": 4,
+      "seq": 64,
+      "token_slots": 256,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b4_s64_last_flatten_matmul.json",
+        "real_time_ms": 60.210782471889,
+        "batch_iterations_per_second": 16.60833428962775,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 66.433337158511,
+      "flatten_token_slots_per_second": 4251.733578144704
+    },
+    {
+      "shape": "b4_s128",
+      "batch": 4,
+      "seq": 128,
+      "token_slots": 512,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b4_s128_last_flatten_matmul.json",
+        "real_time_ms": 110.15930492430925,
+        "batch_iterations_per_second": 9.077769618917076,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 36.3110784756683,
+      "flatten_token_slots_per_second": 4647.818044885543
+    },
+    {
+      "shape": "b4_s256",
+      "batch": 4,
+      "seq": 256,
+      "token_slots": 1024,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b4_s256_last_flatten_matmul.json",
+        "real_time_ms": 188.33690520841628,
+        "batch_iterations_per_second": 5.309644647508035,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 21.23857859003214,
+      "flatten_token_slots_per_second": 5437.076119048228
+    },
+    {
+      "shape": "b8_s32",
+      "batch": 8,
+      "seq": 32,
+      "token_slots": 256,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b8_s32_last_flatten_matmul.json",
+        "real_time_ms": 57.964744279161096,
+        "batch_iterations_per_second": 17.251885748505792,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 138.01508598804634,
+      "flatten_token_slots_per_second": 4416.482751617483
+    },
+    {
+      "shape": "b8_s64",
+      "batch": 8,
+      "seq": 64,
+      "token_slots": 512,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b8_s64_last_flatten_matmul.json",
+        "real_time_ms": 111.4554611267522,
+        "batch_iterations_per_second": 8.972200618809987,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 71.7776049504799,
+      "flatten_token_slots_per_second": 4593.766716830713
+    },
+    {
+      "shape": "b8_s128",
+      "batch": 8,
+      "seq": 128,
+      "token_slots": 1024,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b8_s128_last_flatten_matmul.json",
+        "real_time_ms": 138.9215322715851,
+        "batch_iterations_per_second": 7.1983590386076,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 57.5868723088608,
+      "flatten_token_slots_per_second": 7371.119655534182
+    },
+    {
+      "shape": "b8_s256",
+      "batch": 8,
+      "seq": 256,
+      "token_slots": 2048,
+      "baseline": {
+        "status": "OOM",
+        "summary": "benchmark_b8_s256_last_baseline.json",
+        "returncode": 250
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b8_s256_last_flatten_matmul.json",
+        "real_time_ms": 263.5472392042478,
+        "batch_iterations_per_second": 3.7943889581937023,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 30.355111665549618,
+      "flatten_token_slots_per_second": 7770.908586380702
+    },
+    {
+      "shape": "b16_s32",
+      "batch": 16,
+      "seq": 32,
+      "token_slots": 512,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b16_s32_last_flatten_matmul.json",
+        "real_time_ms": 101.52447767322883,
+        "batch_iterations_per_second": 9.849841918545795,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 157.59747069673273,
+      "flatten_token_slots_per_second": 5043.119062295447
+    },
+    {
+      "shape": "b16_s64",
+      "batch": 16,
+      "seq": 64,
+      "token_slots": 1024,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b16_s64_last_flatten_matmul.json",
+        "real_time_ms": 119.25605514164393,
+        "batch_iterations_per_second": 8.385331590337687,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 134.165305445403,
+      "flatten_token_slots_per_second": 8586.579548505792
+    },
+    {
+      "shape": "b16_s128",
+      "batch": 16,
+      "seq": 128,
+      "token_slots": 2048,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b16_s128_last_flatten_matmul.json",
+        "real_time_ms": 260.32867466759245,
+        "batch_iterations_per_second": 3.841299936278672,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 61.460798980458755,
+      "flatten_token_slots_per_second": 7866.982269498721
+    },
+    {
+      "shape": "b16_s256",
+      "batch": 16,
+      "seq": 256,
+      "token_slots": 4096,
+      "baseline": {
+        "status": "missing"
+      },
+      "flatten_matmul": {
+        "status": "ok",
+        "summary": "benchmark_b16_s256_last_flatten_matmul.json",
+        "real_time_ms": 479.20955133546755,
+        "batch_iterations_per_second": 2.086773915424836,
+        "entry": "BM_main_graph/process_time/real_time_mean"
+      },
+      "flatten_sequences_per_second": 33.388382646797375,
+      "flatten_token_slots_per_second": 8547.425957580128
+    }
+  ]
+}

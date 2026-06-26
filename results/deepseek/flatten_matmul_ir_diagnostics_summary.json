@@ -1,0 +1,1031 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-11T00:31:59.096093",
+    "model": "DeepSeek-R1-Llama-8B",
+    "backend": "IREE CUDA",
+    "cuda_target": "sm_86",
+    "iree_version": "3.11.0rc20260316"
+  },
+  "results": {
+    "b4_s32": {
+      "baseline": {
+        "diagnostics_dir": "flatten_shape_b4_s32/diagnostics_baseline",
+        "configured_dispatch_files": 25,
+        "dispatch_graph_async_dispatch_mentions": 1490,
+        "categories": {
+          "broadcast": 10,
+          "generic": 24,
+          "mma_configured_dispatch": 25,
+          "batch_matmul": 9,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 122,
+        "large_tensor_top": [
+          [
+            "tensor<4x32x4096xf16>",
+            28
+          ],
+          [
+            "tensor<4x32x4096xf32>",
+            18
+          ],
+          [
+            "tensor<4x32x14336xf16>",
+            12
+          ],
+          [
+            "tensor<4x32x14336xf32>",
+            12
+          ],
+          [
+            "tensor<4x58720256xf16>",
+            8
+          ],
+          [
+            "tensor<4x16777216xf16>",
+            8
+          ],
+          [
+            "tensor<4x525336576xf16>",
+            8
+          ],
+          [
+            "tensor<4x32x128256xf16>",
+            6
+          ],
+          [
+            "tensor<4x32x128256xf32>",
+            6
+          ],
+          [
+            "tensor<4x4096x4096xf16>",
+            4
+          ],
+          [
+            "tensor<4x4096x14336xf16>",
+            4
+          ],
+          [
+            "tensor<4x4194304xf16>",
+            4
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x32x4096xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 132,
+        "ptx_wgmma_string_hits": 0
+      },
+      "flatten_matmul": {
+        "diagnostics_dir": "flatten_shape_b4_s32/diagnostics_flatten_matmul",
+        "configured_dispatch_files": 21,
+        "dispatch_graph_async_dispatch_mentions": 1040,
+        "categories": {
+          "broadcast": 6,
+          "generic": 20,
+          "mma_configured_dispatch": 21,
+          "batch_matmul": 2,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 2,
+        "large_tensor_top": [
+          [
+            "tensor<4x32x128256xf16>",
+            2
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<4x32x128256xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<4x32x128256xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 468,
+        "ptx_wgmma_string_hits": 0
+      }
+    },
+    "b4_s64": {
+      "baseline": {
+        "diagnostics_dir": "flatten_shape_b4_s64/diagnostics_baseline",
+        "configured_dispatch_files": 25,
+        "dispatch_graph_async_dispatch_mentions": 1490,
+        "categories": {
+          "broadcast": 10,
+          "generic": 24,
+          "mma_configured_dispatch": 25,
+          "batch_matmul": 9,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 122,
+        "large_tensor_top": [
+          [
+            "tensor<4x64x4096xf16>",
+            28
+          ],
+          [
+            "tensor<4x64x4096xf32>",
+            18
+          ],
+          [
+            "tensor<4x64x14336xf16>",
+            12
+          ],
+          [
+            "tensor<4x64x14336xf32>",
+            12
+          ],
+          [
+            "tensor<4x58720256xf16>",
+            8
+          ],
+          [
+            "tensor<4x16777216xf16>",
+            8
+          ],
+          [
+            "tensor<4x525336576xf16>",
+            8
+          ],
+          [
+            "tensor<4x64x128256xf16>",
+            6
+          ],
+          [
+            "tensor<4x64x128256xf32>",
+            6
+          ],
+          [
+            "tensor<4x4096x4096xf16>",
+            4
+          ],
+          [
+            "tensor<4x4096x14336xf16>",
+            4
+          ],
+          [
+            "tensor<4x4194304xf16>",
+            4
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x64x4096xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 272,
+        "ptx_wgmma_string_hits": 0
+      },
+      "flatten_matmul": {
+        "diagnostics_dir": "flatten_shape_b4_s64/diagnostics_flatten_matmul",
+        "configured_dispatch_files": 21,
+        "dispatch_graph_async_dispatch_mentions": 1040,
+        "categories": {
+          "broadcast": 6,
+          "generic": 20,
+          "mma_configured_dispatch": 21,
+          "batch_matmul": 2,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 2,
+        "large_tensor_top": [
+          [
+            "tensor<4x64x128256xf16>",
+            2
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<4x64x128256xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<4x64x128256xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 496,
+        "ptx_wgmma_string_hits": 0
+      }
+    },
+    "b4_s128": {
+      "baseline": {
+        "diagnostics_dir": "flatten_shape_b4_s128/diagnostics_baseline",
+        "configured_dispatch_files": 25,
+        "dispatch_graph_async_dispatch_mentions": 1490,
+        "categories": {
+          "broadcast": 10,
+          "generic": 24,
+          "mma_configured_dispatch": 25,
+          "batch_matmul": 9,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 122,
+        "large_tensor_top": [
+          [
+            "tensor<4x128x4096xf16>",
+            28
+          ],
+          [
+            "tensor<4x128x4096xf32>",
+            18
+          ],
+          [
+            "tensor<4x128x14336xf16>",
+            12
+          ],
+          [
+            "tensor<4x128x14336xf32>",
+            12
+          ],
+          [
+            "tensor<4x58720256xf16>",
+            8
+          ],
+          [
+            "tensor<4x16777216xf16>",
+            8
+          ],
+          [
+            "tensor<4x525336576xf16>",
+            8
+          ],
+          [
+            "tensor<4x128x128256xf16>",
+            6
+          ],
+          [
+            "tensor<4x128x128256xf32>",
+            6
+          ],
+          [
+            "tensor<4x4096x4096xf16>",
+            4
+          ],
+          [
+            "tensor<4x4096x14336xf16>",
+            4
+          ],
+          [
+            "tensor<4x4194304xf16>",
+            4
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<4x128x4096xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 576,
+        "ptx_wgmma_string_hits": 0
+      },
+      "flatten_matmul": {
+        "diagnostics_dir": "flatten_shape_b4_s128/diagnostics_flatten_matmul",
+        "configured_dispatch_files": 21,
+        "dispatch_graph_async_dispatch_mentions": 1040,
+        "categories": {
+          "broadcast": 6,
+          "generic": 20,
+          "mma_configured_dispatch": 21,
+          "batch_matmul": 2,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 2,
+        "large_tensor_top": [
+          [
+            "tensor<4x128x128256xf16>",
+            2
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<4x128x128256xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<4x128x128256xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 576,
+        "ptx_wgmma_string_hits": 0
+      }
+    },
+    "b8_s32": {
+      "baseline": {
+        "diagnostics_dir": "flatten_shape_b8_s32/diagnostics_baseline",
+        "configured_dispatch_files": 25,
+        "dispatch_graph_async_dispatch_mentions": 1490,
+        "categories": {
+          "broadcast": 10,
+          "generic": 24,
+          "mma_configured_dispatch": 25,
+          "batch_matmul": 9,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 122,
+        "large_tensor_top": [
+          [
+            "tensor<8x32x4096xf16>",
+            28
+          ],
+          [
+            "tensor<8x32x4096xf32>",
+            18
+          ],
+          [
+            "tensor<8x32x14336xf16>",
+            12
+          ],
+          [
+            "tensor<8x32x14336xf32>",
+            12
+          ],
+          [
+            "tensor<8x58720256xf16>",
+            8
+          ],
+          [
+            "tensor<8x16777216xf16>",
+            8
+          ],
+          [
+            "tensor<8x525336576xf16>",
+            8
+          ],
+          [
+            "tensor<8x32x128256xf16>",
+            6
+          ],
+          [
+            "tensor<8x32x128256xf32>",
+            6
+          ],
+          [
+            "tensor<8x4096x4096xf16>",
+            4
+          ],
+          [
+            "tensor<8x4096x14336xf16>",
+            4
+          ],
+          [
+            "tensor<8x4194304xf16>",
+            4
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x32x4096xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 132,
+        "ptx_wgmma_string_hits": 0
+      },
+      "flatten_matmul": {
+        "diagnostics_dir": "flatten_shape_b8_s32/diagnostics_flatten_matmul",
+        "configured_dispatch_files": 21,
+        "dispatch_graph_async_dispatch_mentions": 1040,
+        "categories": {
+          "broadcast": 6,
+          "generic": 20,
+          "mma_configured_dispatch": 21,
+          "batch_matmul": 2,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 2,
+        "large_tensor_top": [
+          [
+            "tensor<8x32x128256xf16>",
+            2
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<8x32x128256xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<8x32x128256xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 468,
+        "ptx_wgmma_string_hits": 0
+      }
+    },
+    "b8_s64": {
+      "baseline": {
+        "diagnostics_dir": "flatten_shape_b8_s64/diagnostics_baseline",
+        "configured_dispatch_files": 25,
+        "dispatch_graph_async_dispatch_mentions": 1490,
+        "categories": {
+          "broadcast": 10,
+          "generic": 24,
+          "mma_configured_dispatch": 25,
+          "batch_matmul": 9,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 122,
+        "large_tensor_top": [
+          [
+            "tensor<8x64x4096xf16>",
+            28
+          ],
+          [
+            "tensor<8x64x4096xf32>",
+            18
+          ],
+          [
+            "tensor<8x64x14336xf16>",
+            12
+          ],
+          [
+            "tensor<8x64x14336xf32>",
+            12
+          ],
+          [
+            "tensor<8x58720256xf16>",
+            8
+          ],
+          [
+            "tensor<8x16777216xf16>",
+            8
+          ],
+          [
+            "tensor<8x525336576xf16>",
+            8
+          ],
+          [
+            "tensor<8x64x128256xf16>",
+            6
+          ],
+          [
+            "tensor<8x64x128256xf32>",
+            6
+          ],
+          [
+            "tensor<8x4096x4096xf16>",
+            4
+          ],
+          [
+            "tensor<8x4096x14336xf16>",
+            4
+          ],
+          [
+            "tensor<8x4194304xf16>",
+            4
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x64x4096xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 272,
+        "ptx_wgmma_string_hits": 0
+      },
+      "flatten_matmul": {
+        "diagnostics_dir": "flatten_shape_b8_s64/diagnostics_flatten_matmul",
+        "configured_dispatch_files": 21,
+        "dispatch_graph_async_dispatch_mentions": 1040,
+        "categories": {
+          "broadcast": 6,
+          "generic": 20,
+          "mma_configured_dispatch": 21,
+          "batch_matmul": 2,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 2,
+        "large_tensor_top": [
+          [
+            "tensor<8x64x128256xf16>",
+            2
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<8x64x128256xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<8x64x128256xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 496,
+        "ptx_wgmma_string_hits": 0
+      }
+    },
+    "b8_s128": {
+      "baseline": {
+        "diagnostics_dir": "flatten_shape_b8_s128/diagnostics_baseline",
+        "configured_dispatch_files": 25,
+        "dispatch_graph_async_dispatch_mentions": 1490,
+        "categories": {
+          "broadcast": 10,
+          "generic": 24,
+          "mma_configured_dispatch": 25,
+          "batch_matmul": 9,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 122,
+        "large_tensor_top": [
+          [
+            "tensor<8x128x4096xf16>",
+            28
+          ],
+          [
+            "tensor<8x128x4096xf32>",
+            18
+          ],
+          [
+            "tensor<8x128x14336xf16>",
+            12
+          ],
+          [
+            "tensor<8x128x14336xf32>",
+            12
+          ],
+          [
+            "tensor<8x58720256xf16>",
+            8
+          ],
+          [
+            "tensor<8x16777216xf16>",
+            8
+          ],
+          [
+            "tensor<8x525336576xf16>",
+            8
+          ],
+          [
+            "tensor<8x128x128256xf16>",
+            6
+          ],
+          [
+            "tensor<8x128x128256xf32>",
+            6
+          ],
+          [
+            "tensor<8x4096x4096xf16>",
+            4
+          ],
+          [
+            "tensor<8x4096x14336xf16>",
+            4
+          ],
+          [
+            "tensor<8x4194304xf16>",
+            4
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x4096x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf32>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_20.mlir",
+            "shape": "tensor<8x128x4096xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 576,
+        "ptx_wgmma_string_hits": 0
+      },
+      "flatten_matmul": {
+        "diagnostics_dir": "flatten_shape_b8_s128/diagnostics_flatten_matmul",
+        "configured_dispatch_files": 21,
+        "dispatch_graph_async_dispatch_mentions": 1040,
+        "categories": {
+          "broadcast": 6,
+          "generic": 20,
+          "mma_configured_dispatch": 21,
+          "batch_matmul": 2,
+          "reduction": 12,
+          "softmax": 1,
+          "scatter": 1
+        },
+        "large_tensor_hits": 2,
+        "large_tensor_top": [
+          [
+            "tensor<8x128x128256xf16>",
+            2
+          ]
+        ],
+        "large_tensor_samples": [
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<8x128x128256xf16>"
+          },
+          {
+            "dispatch": "configured_module_main_graph$async_dispatch_519.mlir",
+            "shape": "tensor<8x128x128256xf16>"
+          }
+        ],
+        "ptx_files": 1,
+        "ptx_mma_string_hits": 384,
+        "ptx_wgmma_string_hits": 0
+      }
+    }
+  }
+}

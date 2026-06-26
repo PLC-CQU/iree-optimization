@@ -1,209 +1,169 @@
-# IREE 优化实验
+# IREE LLM MatMul Flatten Handoff Package
 
-本仓库整理了围绕 **IREE 动态 shape LLM 推理优化** 的代码、实验、报告和编译器补丁。当前重点是 DeepSeek 模型在动态 batch/sequence 输入下的性能问题，以及如何通过 IREE 编译器侧优化让动态模型尽量接近静态模型的 CUDA lowering 质量。
+This folder is the handoff package for the IREE LLM MatMul flatten optimization
+project.
 
-如果你之前没有接触过 IREE，建议先读：
+Start here:
 
 ```text
-docs/reports/00_project_overview_for_newcomers.md
+docs/00_PROJECT_HANDOFF_GUIDE.md
 ```
 
-它会先解释 IREE、ONNX、VMFB、动态 shape、CUDA lowering 等背景，再说明本项目在解决什么问题。
-
-## 当前结果概览
-
-当前最明确的结果来自 DeepSeek 的 graph-level flatten matmul 实验：
-
-| Shape | baseline latency | flatten latency | speedup |
-|---|---:|---:|---:|
-| b4_s32 | 314.07 ms | 39.53 ms | 7.94x |
-| b4_s64 | 308.12 ms | 60.68 ms | 5.08x |
-| b4_s128 | 342.77 ms | 114.23 ms | 3.00x |
-| b8_s32 | 648.72 ms | 60.37 ms | 10.75x |
-| b8_s64 | 608.49 ms | 111.46 ms | 5.46x |
-| b8_s128 | 681.37 ms | 144.88 ms | 4.70x |
-
-6 个 shape 的平均加速为 `6.155x`。同时，当前保留的 b4_s32 / b8_s64 / b8_s128 correctness 结果中，baseline 与 flatten matmul logits 的 `max_abs_error = 0.0`。
-
-更完整的结果见 [性能结果与实验结论汇总](docs/reports/04_benchmark_results_summary.md)。
-
-## 项目目标
-
-动态模型入口通常具有如下输入形态：
+That document explains the whole research path:
 
 ```text
-input_ids:      tensor<?x?xi32>
-attention_mask: tensor<?x?xi32>
+standard model compile/run
+-> static shape flatten optimization
+-> IREE pass implementation
+-> dynamic shape optimization
+-> DeepSeek / Gemma / Qwen validation
+-> known limitations and next steps
 ```
 
-这会使后续很多关键计算的 loop bound 变成运行时 SSA value，例如 `B`、`S`、`B*S`。如果 IREE codegen 无法证明这些动态维度适合 MMA，就容易退到更保守的 lowering，导致动态模型明显慢于静态模型。
-
-本项目当前围绕三件事展开：
-
-1. 分析动态 shape 模型为什么慢，尤其是 projection / MLP / lm_head / attention context 中的 matmul 和 batch matmul。
-2. 在 IREE 中实现并验证 `rank3 matmul -> flattened rank2 matmul`、safe dynamic-M matmul、bounded dynamic shape 等优化。
-3. 用 DeepSeek 模型和最小 MLIR case 复现、定位、量化这些优化的效果与风险。
-
-阶段性结论见 [动态 shape 优化阶段总结](docs/reports/iree_dynamic_shape_optimization_stage_report.md)。
-
-## 仓库结构
+## Directory Layout
 
 ```text
-docs/reports/
-  当前阶段报告，主要记录 DeepSeek 动态 shape 优化现状、性能结果和限制。
+docs/
+  Main handoff guide and topic-specific technical notes.
 
-experiments/dynamic_shape_matmul_experiment/
-  最小 MLIR 实验，用于隔离 static / dynamic shape 在 Flow、HAL、CUDA codegen 中的差异。
+docs/troubleshooting/
+  Independent issue notes. These record real problems encountered during the
+  project and the actual workarounds/fixes used.
+
+src/iree_pass/
+  Main IREE GlobalOptimization pass source and minimal MLIR test.
+
+src/codegen_dynamic/
+  Dynamic shape / CUDA codegen files touched during the dynamic-M exploration.
+
+src/gemma/
+  Gemma compile/benchmark scripts, including the dynamic B/S experiment.
 
 scripts/deepseek/
-  DeepSeek 主流程脚本：动态 ONNX 导出、ONNX matmul rewrite、IREE CUDA 编译、benchmark 和正确性检查。
+  DeepSeek scripts used for rewrite, benchmark, correctness, bucket routing,
+  and external parameter inlining.
 
-scripts/gemma/
-scripts/qwen/
-  Gemma / Qwen 对照测试脚本，用于验证 flatten / static shape 实验是否能迁移到其它模型。
+scripts/dynamic_shape_experiments/
+  Single-op and staged dynamic shape benchmark helpers.
 
-results/deepseek/
-  精简后的核心 benchmark / correctness 汇总结果。
-
-results/figures/
-  主体性能图。
-
-iree-patches/
-  IREE 编译器补丁、新增 pass/test 文件，以及相关源码快照。
+results/
+  Small JSON summaries copied from completed experiments. Large VMFB/ONNX/IRPA
+  artifacts are intentionally not copied into this handoff folder.
 ```
 
-本仓库不是完整产物归档。模型权重、ONNX、VMFB、IRPA、build 目录、日志和临时 tensor dump 都不放入 Git，需要本地重新生成或放到外部存储。
+## What Is Included
 
-## 主要流程
-
-### 1. 应用 IREE 编译器补丁
-
-在本地 IREE checkout 中执行：
-
-```bash
-cd /path/to/iree
-cp -a /path/to/iree-optimization/iree-patches/new-files/* .
-git apply /path/to/iree-optimization/iree-patches/tracked_changes.patch
-```
-
-补丁中的主要内容：
-
-- `FlattenRank3Matmul.cpp`：把 `[B,S,K] x [K,N] -> [B,S,N]` 这类 rank-3 matmul-like contraction 改写成标准二维 `linalg.matmul`。
-- `AssumeInputShapeBounds.cpp`：为动态输入添加 bounded shape assumption，并支持 attention context barrier 实验。
-- CUDA codegen 改动：针对 safe dynamic-M matmul 使用代表性 M bound 选择 MMA config，同时保留 dynamic K / complex dynamic contraction 的 fallback。
-- 相关 BUILD / CMake / lit test 更新。
-
-### 2. 运行最小 MLIR 实验
-
-```bash
-cd experiments/dynamic_shape_matmul_experiment
-IREE_BUILD=/path/to/iree-build bash run_compare.sh
-IREE_BUILD=/path/to/iree-build CUDA_ARCH=sm_86 GPU=0 bash run_extended_cuda_benchmark.sh
-```
-
-这些实验用于观察：
-
-- Flow dispatch 数量是否变化。
-- HAL 层是否从 indirect execute 变成 direct execute。
-- 动态 shape 是否引入更多 shape arithmetic / dispatch constants。
-- CUDA codegen 是否从 `TileAndFuse` / MMA 退到 `VectorDistribute`。
-- guarded specialization 是否能恢复静态 matmul problem size。
-
-### 3. 运行 DeepSeek 动态 shape 主流程
-
-模型文件不放在仓库内。请将模型放在本地目录，例如 `/path/to/model`，然后执行：
-
-```bash
-cd scripts/deepseek
-python3 run_dynamic_shape_pipeline.py --action plan --model-path /path/to/model
-python3 run_dynamic_shape_pipeline.py --action all --model-path /path/to/model --gpu 0
-```
-
-主流程包括：
+Included:
 
 ```text
-导出动态 ONNX
-  -> rewrite rank3 matmul / flatten matmul
-  -> import + compile 为 IREE CUDA VMFB
-  -> 在多个 B/S 请求上 benchmark
+core pass source
+pass registration-related source snapshots
+minimal pass test
+Gemma dynamic experiment script
+DeepSeek benchmark/correctness scripts
+dynamic shape experiment scripts
+technical reports
+small JSON summaries
+troubleshooting notes
 ```
 
-### 4. 检查正确性
+Not included:
 
-代表性脚本：
+```text
+large .onnx models
+large .vmfb files
+large .irpa parameter archives
+large generated MLIR dumps
+```
+
+Those large artifacts remain in their original experiment directories and are
+referenced from the documents.
+
+## Recommended First Run
+
+1. Read the main guide:
 
 ```bash
-cd scripts/deepseek
-python3 verify_flatten_matmul_correctness.py
-bash check_safe_dynamic_m_correctness.sh
+less /home/zhongjialin/projects/iree_llm_matmul_flatten_handoff/docs/00_PROJECT_HANDOFF_GUIDE.md
 ```
 
-这些检查用于确认 flatten matmul rewrite 和 safe dynamic-M 优化没有破坏模型输出语义。
+2. Verify the pass on the minimal MLIR test:
 
-## 核心脚本
+```bash
+/home/zhongjialin/projects/iree-build/tools/iree-opt \
+  --split-input-file \
+  --pass-pipeline='builtin.module(func.func(iree-global-opt-flatten-rank3-matmul))' \
+  /home/zhongjialin/projects/iree/compiler/src/iree/compiler/GlobalOptimization/test/flatten_rank3_matmul.mlir
+```
+
+3. Run the Gemma dynamic B/S benchmark:
+
+```bash
+cd /home/zhongjialin/projects/iree/Gemma
+
+/home/zhongjialin/projects/iree/Gemma/run_gemma_dynamic_shape_experiment.py \
+  --model-path /home/zhongjialin/projects/iree/Gemma/googlegemma-4-E2B-it \
+  --experiment-name gemma_e2b_dynamic_bs_fp16_cuda \
+  --export-device cpu \
+  --gpu 2 \
+  --shapes b1_s32 \
+  --repetitions 3 \
+  --min-time 1x \
+  --warmup-time 0 \
+  --benchmark-timeout-seconds 180 \
+  --action all
+```
+
+If any step fails, check:
 
 ```text
-scripts/deepseek/export_dynamic_onnx.py
-  导出动态 B/S ONNX。
-
-scripts/deepseek/rewrite_onnx_flatten_matmul.py
-  对 ONNX 图做 flatten matmul rewrite。
-
-scripts/deepseek/compile_onnx_iree_cuda.py
-  ONNX -> IREE import -> CUDA VMFB 编译。
-
-scripts/deepseek/run_dynamic_shape_pipeline.py
-  串联导出、rewrite、编译和 benchmark 的主入口。
-
-scripts/deepseek/benchmark_b1_last_cuda.py
-  运行 DeepSeek last-token CUDA benchmark。
-
-scripts/deepseek/check_safe_dynamic_m_correctness.sh
-scripts/deepseek/verify_flatten_matmul_correctness.py
-  正确性检查。
-
-scripts/gemma/run_gemma_flatten_compare.py
-scripts/gemma/run_gemma_static_shape_experiment.py
-scripts/gemma/run_gemma_repeated_single_benchmark.py
-  Gemma flatten / static shape / repeated benchmark 测试。
-
-scripts/qwen/run_qwen25_standard_flatten.py
-scripts/qwen/run_qwen35_flatten_test.py
-scripts/qwen/run_qwen_repeated_single_benchmark.py
-  Qwen flatten 与 repeated benchmark 测试。
+docs/troubleshooting/
 ```
 
-## 技术文档
+## Current Headline Results
+
+DeepSeek dynamic shape:
 
 ```text
-docs/reports/00_project_overview_for_newcomers.md
-  面向第一次接触 IREE 的读者，解释项目背景、目标、方法和当前效果。
-
-docs/reports/01_end_to_end_pipeline.md
-  端到端流程说明：动态 ONNX 导出、rewrite、IREE 编译、benchmark、正确性验证。
-
-docs/reports/02_compiler_optimization_design.md
-  IREE 编译器优化设计：FlattenRank3Matmul、AssumeInputShapeBounds、safe dynamic-M、attention fallback。
-
-docs/reports/03_correctness_validation_and_bugfixes.md
-  正确性验证方法和验证过程中修正/规避的问题。
-
-docs/reports/04_benchmark_results_summary.md
-  当前保留性能结果的表格汇总和结论。
-
-docs/reports/05_cross_model_test_scripts.md
-  Qwen / Gemma 对照测试脚本说明。
-
-docs/reports/iree_dynamic_shape_optimization_stage_report.md
-  动态 shape 优化阶段总结。
+b1_s32:
+  old_dynamic:      3364.666 ms
+  safe_dynamic_m:     82.213 ms
+  static_exact:        37.309 ms
+  speedup:             40.926x
 ```
 
-## 环境说明
+Gemma E2B dynamic B/S:
 
-- 主要实验环境使用 CUDA target `sm_86`，其他 GPU 可通过 `CUDA_ARCH` 或 `--cuda-target` 覆盖。
-- 需要本地可用的 IREE 工具：`iree-compile`、`iree-import-onnx`、`iree-run-module`、`iree-benchmark-module`。
-- Python 依赖见 `requirements.txt`，实际运行还需要与本地模型、CUDA、IREE build 保持一致。
+```text
+b1_s32: 136.603 ms -> 25.102 ms, 5.442x
+b1_s64: 198.063 ms -> 35.870 ms, 5.522x
+b4_s32: 396.723 ms -> 40.125 ms, 9.887x
+```
 
-## 上传说明
+Gemma IR evidence:
 
-见 [UPLOAD.md](UPLOAD.md)。
+```text
+baseline global opt:
+  linalg.matmul:       0
+  linalg.batch_matmul: 279
+
+optimized global opt:
+  linalg.matmul:       277
+  linalg.batch_matmul: 2
+```
+
+## Most Important Limitation
+
+The mature optimization is:
+
+```text
+[B,S,K] x [K,N] -> [B,S,N]
+flattened as
+[B*S,K] x [K,N] -> [B*S,N]
+```
+
+This covers projection / MLP / lm_head style matmuls.
+
+Dynamic attention context is not solved yet. It often has dynamic reduction K,
+which makes MMA lowering harder and previously caused timeout/hang in some
+experiments.

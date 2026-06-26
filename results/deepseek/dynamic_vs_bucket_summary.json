@@ -1,0 +1,303 @@
+{
+  "metadata": {
+    "timestamp": "2026-05-22T16:31:14.356818",
+    "variant": "flatten_matmul",
+    "requests": [
+      "b1_s16",
+      "b1_s32",
+      "b1_s48",
+      "b1_s64",
+      "b1_s96",
+      "b1_s128",
+      "b2_s48",
+      "b3_s80",
+      "b4_s64",
+      "b5_s96",
+      "b8_s128"
+    ],
+    "buckets": [
+      "b4_s32",
+      "b4_s64",
+      "b4_s128",
+      "b8_s32",
+      "b8_s64",
+      "b8_s128"
+    ],
+    "routing_policy": "bucketized static uses the smallest bucket with batch >= request batch and seq >= request seq; fully dynamic runs the exact request shape"
+  },
+  "strategies": {
+    "fully_dynamic": {
+      "name": "fully_dynamic",
+      "status": "complete",
+      "variant": "flatten_matmul",
+      "missing_request_shapes": [],
+      "requests": [
+        {
+          "request_shape": "b1_s16",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 1732.145079066678,
+          "requested_token_slots": 16,
+          "executed_token_slots": 16,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b1_s16_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s32",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 3492.9771238666635,
+          "requested_token_slots": 32,
+          "executed_token_slots": 32,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b1_s32_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s48",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 5202.526580133349,
+          "requested_token_slots": 48,
+          "executed_token_slots": 48,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b1_s48_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s64",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 6962.137947400006,
+          "requested_token_slots": 64,
+          "executed_token_slots": 64,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b1_s64_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s96",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 10466.379461199956,
+          "requested_token_slots": 96,
+          "executed_token_slots": 96,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b1_s96_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s128",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 13930.302470133362,
+          "requested_token_slots": 128,
+          "executed_token_slots": 128,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b1_s128_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b2_s48",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 10464.276118333326,
+          "requested_token_slots": 96,
+          "executed_token_slots": 96,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b2_s48_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b3_s80",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 26011.59283833332,
+          "requested_token_slots": 240,
+          "executed_token_slots": 240,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b3_s80_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b4_s64",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 27853.003364333435,
+          "requested_token_slots": 256,
+          "executed_token_slots": 256,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b4_s64_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b5_s96",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 52343.11527553338,
+          "requested_token_slots": 480,
+          "executed_token_slots": 480,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b5_s96_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b8_s128",
+          "routed_shape": "dynamic",
+          "latency_ms_mean": 111533.07039966674,
+          "requested_token_slots": 1024,
+          "executed_token_slots": 1024,
+          "padding_ratio": 0.0,
+          "latency_source": "dynamic_shape_b_s/benchmark_dynamic_b8_s128_flatten_matmul.json"
+        }
+      ],
+      "aggregate": {
+        "total_latency_ms": 269991.5266580002,
+        "total_request_sequences": 28,
+        "total_request_token_slots": 2480,
+        "total_executed_token_slots": 2480,
+        "overall_padding_ratio": 0.0,
+        "effective_sequences_per_second": 0.10370695831305758,
+        "effective_token_slots_per_second": 9.1854734505851
+      }
+    },
+    "bucketized_static": {
+      "name": "bucketized_static",
+      "status": "complete",
+      "variant": "flatten_matmul",
+      "used_shapes": [
+        "b4_s32",
+        "b4_s64",
+        "b4_s128",
+        "b8_s128"
+      ],
+      "shape_results": {
+        "b4_s32": {
+          "summary": "benchmark_bucket_b4_s32_last_flatten_matmul.json",
+          "real_time_ms_mean": 36.9420242001676,
+          "real_time_ms_median": 36.9664512001691,
+          "batch_iterations_per_second": 27.069478942677932,
+          "source_kind": "google_benchmark"
+        },
+        "b4_s64": {
+          "summary": "benchmark_bucket_b4_s64_last_flatten_matmul.json",
+          "real_time_ms_mean": 60.27015846672535,
+          "real_time_ms_median": 60.28089560022636,
+          "batch_iterations_per_second": 16.591961497871303,
+          "source_kind": "google_benchmark"
+        },
+        "b4_s128": {
+          "summary": "benchmark_bucket_b4_s128_last_flatten_matmul.json",
+          "real_time_ms_mean": 110.23579419991923,
+          "real_time_ms_median": 110.24947060013801,
+          "batch_iterations_per_second": 9.071468705677292,
+          "source_kind": "google_benchmark"
+        },
+        "b8_s128": {
+          "summary": "benchmark_bucket_b8_s128_last_flatten_matmul.json",
+          "real_time_ms_mean": 139.0012959333641,
+          "real_time_ms_median": 138.98946400004206,
+          "batch_iterations_per_second": 7.194184077044988,
+          "source_kind": "google_benchmark"
+        }
+      },
+      "requests": [
+        {
+          "request_shape": "b1_s16",
+          "routed_shape": "b4_s32",
+          "latency_ms_mean": 36.9420242001676,
+          "requested_token_slots": 16,
+          "executed_token_slots": 128,
+          "padding_ratio": 0.875,
+          "latency_source": "benchmark_bucket_b4_s32_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s32",
+          "routed_shape": "b4_s32",
+          "latency_ms_mean": 36.9420242001676,
+          "requested_token_slots": 32,
+          "executed_token_slots": 128,
+          "padding_ratio": 0.75,
+          "latency_source": "benchmark_bucket_b4_s32_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s48",
+          "routed_shape": "b4_s64",
+          "latency_ms_mean": 60.27015846672535,
+          "requested_token_slots": 48,
+          "executed_token_slots": 256,
+          "padding_ratio": 0.8125,
+          "latency_source": "benchmark_bucket_b4_s64_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s64",
+          "routed_shape": "b4_s64",
+          "latency_ms_mean": 60.27015846672535,
+          "requested_token_slots": 64,
+          "executed_token_slots": 256,
+          "padding_ratio": 0.75,
+          "latency_source": "benchmark_bucket_b4_s64_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s96",
+          "routed_shape": "b4_s128",
+          "latency_ms_mean": 110.23579419991923,
+          "requested_token_slots": 96,
+          "executed_token_slots": 512,
+          "padding_ratio": 0.8125,
+          "latency_source": "benchmark_bucket_b4_s128_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b1_s128",
+          "routed_shape": "b4_s128",
+          "latency_ms_mean": 110.23579419991923,
+          "requested_token_slots": 128,
+          "executed_token_slots": 512,
+          "padding_ratio": 0.75,
+          "latency_source": "benchmark_bucket_b4_s128_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b2_s48",
+          "routed_shape": "b4_s64",
+          "latency_ms_mean": 60.27015846672535,
+          "requested_token_slots": 96,
+          "executed_token_slots": 256,
+          "padding_ratio": 0.625,
+          "latency_source": "benchmark_bucket_b4_s64_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b3_s80",
+          "routed_shape": "b4_s128",
+          "latency_ms_mean": 110.23579419991923,
+          "requested_token_slots": 240,
+          "executed_token_slots": 512,
+          "padding_ratio": 0.53125,
+          "latency_source": "benchmark_bucket_b4_s128_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b4_s64",
+          "routed_shape": "b4_s64",
+          "latency_ms_mean": 60.27015846672535,
+          "requested_token_slots": 256,
+          "executed_token_slots": 256,
+          "padding_ratio": 0.0,
+          "latency_source": "benchmark_bucket_b4_s64_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b5_s96",
+          "routed_shape": "b8_s128",
+          "latency_ms_mean": 139.0012959333641,
+          "requested_token_slots": 480,
+          "executed_token_slots": 1024,
+          "padding_ratio": 0.53125,
+          "latency_source": "benchmark_bucket_b8_s128_last_flatten_matmul.json"
+        },
+        {
+          "request_shape": "b8_s128",
+          "routed_shape": "b8_s128",
+          "latency_ms_mean": 139.0012959333641,
+          "requested_token_slots": 1024,
+          "executed_token_slots": 1024,
+          "padding_ratio": 0.0,
+          "latency_source": "benchmark_bucket_b8_s128_last_flatten_matmul.json"
+        }
+      ],
+      "aggregate": {
+        "total_latency_ms": 923.6746567337225,
+        "total_request_sequences": 28,
+        "total_request_token_slots": 2480,
+        "total_executed_token_slots": 4864,
+        "overall_padding_ratio": 0.4901315789473684,
+        "effective_sequences_per_second": 30.313703852190738,
+        "effective_token_slots_per_second": 2684.928055479751
+      }
+    }
+  },
+  "comparisons": {
+    "dynamic_vs_bucket_latency_speedup": 0.0034211246114539975,
+    "bucket_vs_dynamic_latency_speedup": 292.3015422039814,
+    "dynamic_minus_bucket_latency_ms": 269067.8520012665,
+    "dynamic_minus_bucket_padding_points": -49.01315789473684
+  }
+}

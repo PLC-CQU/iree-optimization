@@ -1,0 +1,72 @@
+{
+  "mode": "dry_run",
+  "rewrite_rule": "MatMul([B,S,K], [K,N]) -> Reshape -> MatMul([B*S,K], [K,N]) -> Reshape",
+  "results": [
+    {
+      "batch": 4,
+      "seq": 32,
+      "matmul_total": 290,
+      "weight_matmul_total": 225,
+      "rewritten_weight_matmul_nodes": 225,
+      "skipped_matmul_by_reason": {
+        "rhs_not_initializer": 65
+      },
+      "report": "/home/zhongjialin/projects/iree/deepseek-R1-Llama-8b/results/rewrite_pass_reports/rewrite_pass_b4_s32.json"
+    },
+    {
+      "batch": 4,
+      "seq": 64,
+      "matmul_total": 290,
+      "weight_matmul_total": 225,
+      "rewritten_weight_matmul_nodes": 225,
+      "skipped_matmul_by_reason": {
+        "rhs_not_initializer": 65
+      },
+      "report": "/home/zhongjialin/projects/iree/deepseek-R1-Llama-8b/results/rewrite_pass_reports/rewrite_pass_b4_s64.json"
+    },
+    {
+      "batch": 4,
+      "seq": 128,
+      "matmul_total": 290,
+      "weight_matmul_total": 225,
+      "rewritten_weight_matmul_nodes": 225,
+      "skipped_matmul_by_reason": {
+        "rhs_not_initializer": 65
+      },
+      "report": "/home/zhongjialin/projects/iree/deepseek-R1-Llama-8b/results/rewrite_pass_reports/rewrite_pass_b4_s128.json"
+    },
+    {
+      "batch": 8,
+      "seq": 32,
+      "matmul_total": 290,
+      "weight_matmul_total": 225,
+      "rewritten_weight_matmul_nodes": 225,
+      "skipped_matmul_by_reason": {
+        "rhs_not_initializer": 65
+      },
+      "report": "/home/zhongjialin/projects/iree/deepseek-R1-Llama-8b/results/rewrite_pass_reports/rewrite_pass_b8_s32.json"
+    },
+    {
+      "batch": 8,
+      "seq": 64,
+      "matmul_total": 290,
+      "weight_matmul_total": 225,
+      "rewritten_weight_matmul_nodes": 225,
+      "skipped_matmul_by_reason": {
+        "rhs_not_initializer": 65
+      },
+      "report": "/home/zhongjialin/projects/iree/deepseek-R1-Llama-8b/results/rewrite_pass_reports/rewrite_pass_b8_s64.json"
+    },
+    {
+      "batch": 8,
+      "seq": 128,
+      "matmul_total": 290,
+      "weight_matmul_total": 225,
+      "rewritten_weight_matmul_nodes": 225,
+      "skipped_matmul_by_reason": {
+        "rhs_not_initializer": 65
+      },
+      "report": "/home/zhongjialin/projects/iree/deepseek-R1-Llama-8b/results/rewrite_pass_reports/rewrite_pass_b8_s128.json"
+    }
+  ]
+}

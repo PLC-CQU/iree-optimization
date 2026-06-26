@@ -1,0 +1,85 @@
+{
+  "generated": "2026-06-18T19:01:48.432478",
+  "summary": [
+    {
+      "shape": "b1_s64",
+      "baseline_dynamic_ms": 198.06265955169997,
+      "optimized_dynamic_ms": 35.86956517150004,
+      "speedup": 5.5217468794149065,
+      "baseline_returncode": 0,
+      "optimized_returncode": 0
+    },
+    {
+      "shape": "b4_s32",
+      "baseline_dynamic_ms": 396.72302997981507,
+      "optimized_dynamic_ms": 40.12542900939782,
+      "speedup": 9.887072606423676,
+      "baseline_returncode": 0,
+      "optimized_returncode": 0
+    }
+  ],
+  "benchmarks": [
+    {
+      "variant": "baseline_dynamic",
+      "shape": "b1_s64",
+      "returncode": 0,
+      "json": "/home/zhongjialin/projects/iree/Gemma/dynamic_experiments/gemma_e2b_dynamic_bs_fp16_cuda/baseline_dynamic/benchmark_b1_s64.googlebench.json",
+      "mean_ms": 198.06265955169997
+    },
+    {
+      "variant": "optimized_dynamic",
+      "shape": "b1_s64",
+      "returncode": 0,
+      "json": "/home/zhongjialin/projects/iree/Gemma/dynamic_experiments/gemma_e2b_dynamic_bs_fp16_cuda/optimized_dynamic/benchmark_b1_s64.googlebench.json",
+      "mean_ms": 35.86956517150004
+    },
+    {
+      "variant": "baseline_dynamic",
+      "shape": "b4_s32",
+      "returncode": 0,
+      "json": "/home/zhongjialin/projects/iree/Gemma/dynamic_experiments/gemma_e2b_dynamic_bs_fp16_cuda/baseline_dynamic/benchmark_b4_s32.googlebench.json",
+      "mean_ms": 396.72302997981507
+    },
+    {
+      "variant": "optimized_dynamic",
+      "shape": "b4_s32",
+      "returncode": 0,
+      "json": "/home/zhongjialin/projects/iree/Gemma/dynamic_experiments/gemma_e2b_dynamic_bs_fp16_cuda/optimized_dynamic/benchmark_b4_s32.googlebench.json",
+      "mean_ms": 40.12542900939782
+    }
+  ],
+  "correctness": [
+    {
+      "shape": "b1_s64",
+      "baseline_dynamic_vs_optimized_dynamic": {
+        "shape_a": [
+          1,
+          262144
+        ],
+        "shape_b": [
+          1,
+          262144
+        ],
+        "max_abs": 0.0546875,
+        "mean_abs": 0.009317765943706036,
+        "allclose_atol_0.06_rtol_0.01": true
+      }
+    },
+    {
+      "shape": "b4_s32",
+      "baseline_dynamic_vs_optimized_dynamic": {
+        "shape_a": [
+          4,
+          262144
+        ],
+        "shape_b": [
+          4,
+          262144
+        ],
+        "max_abs": 0.046875,
+        "mean_abs": 0.00561958784237504,
+        "allclose_atol_0.06_rtol_0.01": true
+      }
+    }
+  ]
+}
